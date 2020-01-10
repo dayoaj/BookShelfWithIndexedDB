@@ -5,90 +5,10 @@
   <meta name="keywords" content="HTML5,IndexedDB,CSS,Responsive">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Book-Shelf</title>
-  <style media="screen">
-  /* generic */
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        font-size: 10px;
-        scroll-behavior: smooth;
-      }
-
-
-/* layout */
-      .content {
-        display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        grid-gap: 1rem;
-        grid-template-rows: 10% 1fr 10%;
-        height: 100vh;
-      }
-      header {
-        grid-column: 1/9;
-      }
-      .mobile-nav {
-        grid-column: 1/9;
-        grid-row: 3/4;
-      }
-      main {
-        grid-column: 1/9;
-      }
-      .mobile-nav-svg {
-        fill: #a9a9a9;
-        width: 40px;
-        height: 40px;
-      }
-
-      .desktop-nav {
-        display: none;
-      }
-
-      .mobile-nav a {
-        font-size: 1.4rem;
-        text-decoration: none;
-        color: #a9a9a9;
-        font-family: Verdana, sans-serif;
-      }
-
-
-     .book-card {
-          display:block;
-          border:1px solid #CCC;
-          box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
-          cursor: pointer;
-          vertical-align:middle;
-          padding: 1rem 2rem;
-          text-align: center;
-          width: 15rem;
-          font-family: sans-serif;
-          font-weight: bold;
-          font-size: 1.2rem;
-      }
-      .book-card:active {
-          box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
-      }
-
-      .book-card:hover {
-          box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
-      }
-
-/* headings */
-      h1 {
-        font-size: 3rem;
-        font-family: Arial, sans-serif;
-      }
-      h1.logo {
-        font-size: 4rem;
-        font-family: "Trebuchet MS", sans-serif;
-      }
-
-  </style>
+  <link rel="stylesheet" href="/css/master.css">
 </head>
 <body>
   <div class="content">
-
     <header>
       <h1 class="logo">Bookshelf</h1>
     </header>
@@ -132,7 +52,9 @@
       </a>
     </nav>
     <main>
-      <h1>Library</h1>
+      <div class="wrap-header">
+        <h1>Library</h1>
+      </div>
       <div class="book-list">
         <button>Add Books</button>
         <button>Add New Books</button>
@@ -140,6 +62,7 @@
 
         </div>
       </div>
+
     </main>
   </div>
 </body>

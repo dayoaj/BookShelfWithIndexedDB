@@ -4,6 +4,7 @@
   <meta name="description" content="Demonstrating the use of IndexedDB">
   <meta name="keywords" content="HTML5,IndexedDB,CSS,Responsive">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap" rel="stylesheet">
   <title>Book-Shelf</title>
   <link rel="stylesheet" href="/css/master.css">
 </head>
@@ -13,6 +14,47 @@
       <h1 class="logo">Bookshelf</h1>
     </header>
     <nav class="desktop-nav">
+      <div class="nav-item search-div">
+        <label for="search-input" id="search-label">Search Books by Title</label>
+        <input type="search" name="search-input" value="" id="search-input" placeholder="Search">
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" class="desktop-search-svg"
+        viewBox="0 0 28.931 28.932" style="enable-background:new 0 0 28.931 28.932;"
+           xml:space="preserve">
+        <g>
+          <path d="M28.344,25.518l-6.114-6.115c1.486-2.067,2.303-4.537,2.303-7.137c0-3.275-1.275-6.355-3.594-8.672
+            C18.625,1.278,15.543,0,12.266,0C8.99,0,5.909,1.275,3.593,3.594C1.277,5.909,0.001,8.99,0.001,12.266
+            c0,3.276,1.275,6.356,3.592,8.674c2.316,2.316,5.396,3.594,8.673,3.594c2.599,0,5.067-0.813,7.136-2.303l6.114,6.115
+            c0.392,0.391,0.902,0.586,1.414,0.586c0.513,0,1.024-0.195,1.414-0.586C29.125,27.564,29.125,26.299,28.344,25.518z M6.422,18.111
+            c-1.562-1.562-2.421-3.639-2.421-5.846S4.86,7.983,6.422,6.421c1.561-1.562,3.636-2.422,5.844-2.422s4.284,0.86,5.845,2.422
+            c1.562,1.562,2.422,3.638,2.422,5.845s-0.859,4.283-2.422,5.846c-1.562,1.562-3.636,2.42-5.845,2.42S7.981,19.672,6.422,18.111z"/>
+        </g>
+        </svg>
+      </div>
+      <div class="nav-item">
+        <button type="button" name="clear-btn" id="clear-btn">
+          Clear Books
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           viewBox="0 0 41.756 41.756" style="enable-background:new 0 0 41.756 41.756;" xml:space="preserve" class="mobile-nav-svg">
+          <g>
+          	<path d="M27.948,20.878L40.291,8.536c1.953-1.953,1.953-5.119,0-7.071c-1.951-1.952-5.119-1.952-7.07,0L20.878,13.809L8.535,1.465
+          		c-1.951-1.952-5.119-1.952-7.07,0c-1.953,1.953-1.953,5.119,0,7.071l12.342,12.342L1.465,33.22c-1.953,1.953-1.953,5.119,0,7.071
+          		C2.44,41.268,3.721,41.755,5,41.755c1.278,0,2.56-0.487,3.535-1.464l12.343-12.342l12.343,12.343
+          		c0.976,0.977,2.256,1.464,3.535,1.464s2.56-0.487,3.535-1.464c1.953-1.953,1.953-5.119,0-7.071L27.948,20.878z"/>
+          </g>
+          </svg>
+        </button>
+      </div>
+      <div class="nav-item">
+        <button type="button" name="add-new-btn" id="clear-btn">
+          Add New Book
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+          	 viewBox="0 0 42 42" style="enable-background:new 0 0 42 42;" xml:space="preserve" class="mobile-nav-svg" >
+          <path d="M37.059,16H26V4.941C26,2.224,23.718,0,21,0s-5,2.224-5,4.941V16H4.941C2.224,16,0,18.282,0,21s2.224,5,4.941,5H16v11.059
+          	C16,39.776,18.282,42,21,42s5-2.224,5-4.941V26h11.059C39.776,26,42,23.718,42,21S39.776,16,37.059,16z"/>
+          </svg>
+        </button>
+      </div>
+
     </nav>
     <nav class="mobile-nav">
       <a href="#">
@@ -58,8 +100,7 @@
       <div class="center">
 
         <div class="action-tag">
-          <button>Add Books</button>
-          <button>Add New Books</button>
+          <button>Publish</button>
         </div>
       <div class="book-list">
 

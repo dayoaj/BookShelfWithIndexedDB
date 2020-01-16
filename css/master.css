@@ -21,7 +21,6 @@
       grid-column: 1/9;
       padding: 1rem 2rem;
       background: #ffaa1d;
-      /* box-shadow: 0px 6px 8px -3px rgba(178,178,178); */
       display: flex;
       align-items: center;
     }
@@ -37,7 +36,7 @@
     main .center {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
     }
     .mobile-nav-svg {
       fill: #a9a9a9;
@@ -73,6 +72,10 @@
       background-color: #ccc;
     }
 
+    .mobile-nav a:hover  svg{
+      fill: #777;
+    }
+
 
    .book-card {
         display:block;
@@ -86,6 +89,8 @@
         font-family: sans-serif;
         font-weight: bold;
         font-size: 1.2rem;
+        margin: auto;
+
     }
     .book-card:active {
         box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
@@ -112,30 +117,33 @@
     }
 
     .book-list {
-      width: 70%;
+      width: 90%;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       padding-top: 1.2rem;
-    }
-    .action-tag {
-      padding-top: 1.2rem;
+      flex-grow: 1;
+      margin: auto;
     }
 
-    .action-tag button {
+    button.action-tag  {
       background-color: #ce93d8;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      border: none;
+      border-radius: 3px;
       padding: 0.6rem 1rem;
-      margin: 0.6rem 0.6rem;
       font-size: 1.6rem;
       font-weight: 600;
       transition: background-color 0.3s ease-out;
       font-family: 'Open Sans', sans-serif;
+      width: 80%;
+      margin: 3rem auto;
+      height: 4rem;
+      cursor: pointer;
     }
 
-    .action-tag button:hover, .action-tag button:active {
+    button.action-tag:hover, button.action-tag:active {
       background-color: #e1bee7;
+
     }
 
     /* responsive desktop */
@@ -148,7 +156,7 @@
     }
 
     .nav-item button {
-      border: 1px solid #aaa;
+      border: none;
       border-radius: 4px;
       padding: 0.5rem 2rem;
       flex-grow: 1;
@@ -156,8 +164,10 @@
       justify-content: space-between;
       font-family: "Open Sans", sans-serif;
       font-size: 2rem;
-      color: #777;
+      color: #222;
       align-items: center;
+      max-height: 5.5rem;
+      cursor: pointer;
     }
 
     .nav-item button svg {
@@ -165,9 +175,40 @@
       height: 23px;
     }
 
+    .nav-item > button:hover, .nav-item > button:active {
+      box-shadow: 0px 0px 4px 1px;
+    }
+
+    button#clear-btn {
+      background-color: #d21d1d ;
+    }
+
+    button#clear-btn:hover, button#add-btn:active  {
+      background-color: #f11f1f;
+      box-shadow: 0px 0px 4px 1px #f11f1f;
+    }
+
+    button#clear-btn:hover svg, button#clear-btn:active svg{
+      fill: #b10909;
+    }
+
+    button#add-btn {
+      background-color: #2ec56e;
+    }
+
+    button#add-btn:hover, button#add-btn:active {
+      background-color: #04f56a;
+      box-shadow: 0px 0px 4px 1px #04f56a;
+    }
+
+    button#add-btn:hover svg, button#add-btn:active svg {
+      fill: #159049;
+    }
+
     div.search-div {
       position: relative;
       flex-direction: column-reverse;
+      margin-top: 1.5rem;
     }
 
     .desktop-search-svg {
@@ -196,7 +237,7 @@
 
 
     /* Media Queries */
-    @media screen and (min-width: 1120px) {
+    @media screen and (min-width: 1137px) {
       .content {
         grid-template-rows: minmax(55px, 10%) 1fr;
       }

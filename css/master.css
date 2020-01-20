@@ -14,7 +14,7 @@
     .content {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
-      grid-template-rows: minmax(55px, 10%) 1fr 12%;
+      grid-template-rows: minmax(55px, 10%) 1fr;
       height: 100vh;
     }
     header {
@@ -25,10 +25,16 @@
       align-items: center;
     }
     .mobile-nav {
-      grid-column: 1/9;
-      grid-row: 3/4;
       display: flex;
+      position: fixed;
+      z-index: 5;
+      align-items: center;
+      justify-content: space-around;
+      left: 0;
+      right: 0;
+      bottom: 0;
     }
+
     main {
       grid-column: 1/9;
     }

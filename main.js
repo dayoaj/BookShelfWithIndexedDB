@@ -205,11 +205,13 @@ const idbApp = (function() {
       for(const book of bookData) {
         s += `<div href="#" class="book-card">
         <img src=${book.imageUrl} alt="picture of book"/>
-          <h3>${book.title}</h3>
-          <span>${book.author}</span>
-          <span>${book.rating}</span>
-          <span>${book.ratingsNo}</span>
-          <div>${book.description}</div>
+          <div class="book-details">
+            <h3>${book.title}</h3>
+            <span>${book.author}</span>
+            <span>${book.rating}</span>
+            <span>${book.ratingsNo}</span>
+            <div>${book.description}</div>
+          </div>
         </div>`;
       }
       document.querySelector('.action-tag').style.display = 'none';

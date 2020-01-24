@@ -212,15 +212,16 @@ const idbApp = (function() {
             <div class="description">${book.description}</div>
             <div class="book-actions">
               <button>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="#ccc" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
-                    <path d="M0 0h24v24H0z" fill="none" />
+                  <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" fill="#ccc" viewBox="0 0 383.947 383.947" style="enable-background:new 0 0 383.947 383.947;" xml:space="preserve" width="22px" height="22px">
+                  	<polygon points="0,303.947 0,383.947 80,383.947 316.053,147.893 236.053,67.893 " />
+                  	<path d="M377.707,56.053L327.893,6.24c-8.32-8.32-21.867-8.32-30.187,0l-39.04,39.04l80,80l39.04-39.04
+                  		C386.027,77.92,386.027,64.373,377.707,56.053z" />
                   </svg>
                 </button>
                 <button>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                      <path fill="#ccc" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                      <path d="M0 0h24v24H0z" fill="none" />
+                  <svg id="Capa_1" enable-background="new 0 0 515.556 515.556" height="22px" width="22px" fill="#ccc" viewBox="0 0 515.556 515.556"  xmlns="http://www.w3.org/2000/svg">
+                      <path d="m64.444 451.111c0 35.526 28.902 64.444 64.444 64.444h257.778c35.542 0 64.444-28.918 64.444-64.444v-322.222h-386.666z" />
+                      <path d="m322.222 32.222v-32.222h-128.889v32.222h-161.111v64.444h451.111v-64.444z" />
                   </svg>
                 </button>
             </div>

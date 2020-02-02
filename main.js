@@ -10,8 +10,31 @@ const idbApp = (function() {
       return;
   };
 
+let db;
+const request = window.indexedDB.open("bookshelf-demo-indexeddb", 1);
+
+request.onsuccess = function(event) {
+  db = request.result;
+  console.log("Database Opened");
+}
+
+request.onerror = function(event) {
+  console.log("error: ", event.target.errorCode);
+}
+
+request.onupgradeneeded = function(event) {
+    const store = event.currentTarget.result.createObjectStore('books', {keyPath: "id"});
+
+    store.createIndex('title', 'title');
+    store.createIndex('rating','rating');
+
+}
+
+
 
   function publishBooks() {
+    const tx = db.transaction('books', 'readwrite');
+    const store = tx.objectStore('books');
     const bookData = [
         {
           id: '01',
@@ -203,6 +226,12 @@ const idbApp = (function() {
       ];
       let s = '';
       for(const book of bookData) {
+
+        let request = store.add(book);
+        request.onsuccess = (event) => {
+          console.log('Succesfully added resource: ',event.target.result);
+        };
+
         s += `<div href="#" class="book-card">
         <img src=${book.imageUrl} alt="picture of book"/>
           <div class="book-details">
@@ -229,14 +258,21 @@ const idbApp = (function() {
         </div>`;
       }
       document.querySelector('.book-list').innerHTML = s;
+  }
 
-
+  function clearObjectStore() {
+    const tx = db.transaction('books', 'readwrite');
+    const store = tx.objectStore('books');
+    let request = store.clear();
+    request.onsuccess = (event) => {
+      console.log('Database cleared');
+    }
   }
 
 
-
   return {
-    publishBooks: (publishBooks)
+    publishBooks: (publishBooks),
+    clearObjectStore: (clearObjectStore)
   };
 
 })();

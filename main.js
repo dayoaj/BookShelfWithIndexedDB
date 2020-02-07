@@ -10,31 +10,77 @@ const idbApp = (function() {
       return;
   };
 
-let db;
-const request = window.indexedDB.open("bookshelf-demo-indexeddb", 1);
+  let db;
+  const request = window.indexedDB.open("books", 1);
 
-request.onsuccess = function(event) {
-  db = request.result;
-  console.log("Database Opened");
-}
+  request.onsuccess = function(event) {
 
-request.onerror = function(event) {
-  console.log("error: ", event.target.errorCode);
-}
+    db = request.result;
+    console.log("Database Opened");
+  }
 
-request.onupgradeneeded = function(event) {
-    const store = event.currentTarget.result.createObjectStore('books', {keyPath: "id"});
+  request.onerror = function(event) {
+    console.log("error: ", event.target.errorCode);
+  }
 
-    store.createIndex('title', 'title');
-    store.createIndex('rating','rating');
+  request.onupgradeneeded = function(event) {
+      const store = event.currentTarget.result.createObjectStore('books', {keyPath: "id"});
 
-}
+      store.createIndex('title', 'title');
+      store.createIndex('rating','rating');
+  }
+
+  function renderBooks() {
+    let s = '';
+
+    const objectStore = db.transaction("books").objectStore("books");
+
+    objectStore.getAll().onsuccess = function(event) {
+
+      for(const book of event.target.result) {
+        s += `<div href="#" class="book-card">
+        <img src=${book.imageUrl} alt="picture of book"/>
+          <div class="book-details">
+            <h3>${book.title}</h3>
+            <span>by ${book.author}</span>
+            <span>rated ${book.rating} of ${book.ratingsNo} ratings</span>
+            <div class="description">${book.description}</div>
+            <div class="book-actions">
+              <button>
+                  <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" fill="#ccc" viewBox="0 0 383.947 383.947" style="enable-background:new 0 0 383.947 383.947;" xml:space="preserve" width="22px" height="22px">
+                    <polygon points="0,303.947 0,383.947 80,383.947 316.053,147.893 236.053,67.893 " />
+                    <path d="M377.707,56.053L327.893,6.24c-8.32-8.32-21.867-8.32-30.187,0l-39.04,39.04l80,80l39.04-39.04
+                      C386.027,77.92,386.027,64.373,377.707,56.053z" />
+                  </svg>
+                </button>
+                <button>
+                  <svg id="Capa_1" enable-background="new 0 0 515.556 515.556" height="22px" width="22px" fill="#ccc" viewBox="0 0 515.556 515.556"  xmlns="http://www.w3.org/2000/svg">
+                      <path d="m64.444 451.111c0 35.526 28.902 64.444 64.444 64.444h257.778c35.542 0 64.444-28.918 64.444-64.444v-322.222h-386.666z" />
+                      <path d="m322.222 32.222v-32.222h-128.889v32.222h-161.111v64.444h451.111v-64.444z" />
+                  </svg>
+                </button>
+            </div>
+          </div>
+        </div>`;
+      }
+
+
+      document.querySelector('.book-list').innerHTML =  (s === ''?'No Book to List': s);
+    }
+  }
 
 
 
   function publishBooks() {
+
     const tx = db.transaction('books', 'readwrite');
     const store = tx.objectStore('books');
+
+    // if (itemNumber){
+    //   return console.log("We've got items in the database already: ", itemNumber);
+    // }
+
+    // if (store.count()) {console.log(store.count())};
     const bookData = [
         {
           id: '01',
@@ -224,46 +270,48 @@ request.onupgradeneeded = function(event) {
           tags: []
         }
       ];
-      let s = '';
+      // let s = '';
       for(const book of bookData) {
-
         let request = store.add(book);
         request.onsuccess = (event) => {
           console.log('Succesfully added resource: ',event.target.result);
         };
 
-        s += `<div href="#" class="book-card">
-        <img src=${book.imageUrl} alt="picture of book"/>
-          <div class="book-details">
-            <h3>${book.title}</h3>
-            <span>by ${book.author}</span>
-            <span>rated ${book.rating} of ${book.ratingsNo} ratings</span>
-            <div class="description">${book.description}</div>
-            <div class="book-actions">
-              <button>
-                  <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" fill="#ccc" viewBox="0 0 383.947 383.947" style="enable-background:new 0 0 383.947 383.947;" xml:space="preserve" width="22px" height="22px">
-                  	<polygon points="0,303.947 0,383.947 80,383.947 316.053,147.893 236.053,67.893 " />
-                  	<path d="M377.707,56.053L327.893,6.24c-8.32-8.32-21.867-8.32-30.187,0l-39.04,39.04l80,80l39.04-39.04
-                  		C386.027,77.92,386.027,64.373,377.707,56.053z" />
-                  </svg>
-                </button>
-                <button>
-                  <svg id="Capa_1" enable-background="new 0 0 515.556 515.556" height="22px" width="22px" fill="#ccc" viewBox="0 0 515.556 515.556"  xmlns="http://www.w3.org/2000/svg">
-                      <path d="m64.444 451.111c0 35.526 28.902 64.444 64.444 64.444h257.778c35.542 0 64.444-28.918 64.444-64.444v-322.222h-386.666z" />
-                      <path d="m322.222 32.222v-32.222h-128.889v32.222h-161.111v64.444h451.111v-64.444z" />
-                  </svg>
-                </button>
-            </div>
-          </div>
-        </div>`;
+        // s += `<div href="#" class="book-card">
+        // <img src=${book.imageUrl} alt="picture of book"/>
+        //   <div class="book-details">
+        //     <h3>${book.title}</h3>
+        //     <span>by ${book.author}</span>
+        //     <span>rated ${book.rating} of ${book.ratingsNo} ratings</span>
+        //     <div class="description">${book.description}</div>
+        //     <div class="book-actions">
+        //       <button>
+        //           <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" fill="#ccc" viewBox="0 0 383.947 383.947" style="enable-background:new 0 0 383.947 383.947;" xml:space="preserve" width="22px" height="22px">
+        //           	<polygon points="0,303.947 0,383.947 80,383.947 316.053,147.893 236.053,67.893 " />
+        //           	<path d="M377.707,56.053L327.893,6.24c-8.32-8.32-21.867-8.32-30.187,0l-39.04,39.04l80,80l39.04-39.04
+        //           		C386.027,77.92,386.027,64.373,377.707,56.053z" />
+        //           </svg>
+        //         </button>
+        //         <button>
+        //           <svg id="Capa_1" enable-background="new 0 0 515.556 515.556" height="22px" width="22px" fill="#ccc" viewBox="0 0 515.556 515.556"  xmlns="http://www.w3.org/2000/svg">
+        //               <path d="m64.444 451.111c0 35.526 28.902 64.444 64.444 64.444h257.778c35.542 0 64.444-28.918 64.444-64.444v-322.222h-386.666z" />
+        //               <path d="m322.222 32.222v-32.222h-128.889v32.222h-161.111v64.444h451.111v-64.444z" />
+        //           </svg>
+        //         </button>
+        //     </div>
+        //   </div>
+        // </div>`;
       }
-      document.querySelector('.book-list').innerHTML = s;
+
+      renderBooks();
+      // document.querySelector('.book-list').innerHTML = s;
   }
 
   function clearObjectStore() {
     const tx = db.transaction('books', 'readwrite');
     const store = tx.objectStore('books');
     let request = store.clear();
+    renderBooks();
     request.onsuccess = (event) => {
       console.log('Database cleared');
     }

@@ -73,14 +73,9 @@ const idbApp = (function() {
 
   function publishBooks() {
 
-    const tx = db.transaction('books', 'readwrite');
-    const store = tx.objectStore('books');
+    const transaction = db.transaction('books', 'readwrite');
+    const store = transaction.objectStore('books');
 
-    // if (itemNumber){
-    //   return console.log("We've got items in the database already: ", itemNumber);
-    // }
-
-    // if (store.count()) {console.log(store.count())};
     const bookData = [
         {
           id: '01',
@@ -308,8 +303,8 @@ const idbApp = (function() {
   }
 
   function clearObjectStore() {
-    const tx = db.transaction('books', 'readwrite');
-    const store = tx.objectStore('books');
+    const transaction = db.transaction('books', 'readwrite');
+    const store = transaction.objectStore('books');
     let request = store.clear();
     renderBooks();
     request.onsuccess = (event) => {
@@ -317,10 +312,53 @@ const idbApp = (function() {
     }
   }
 
+  function searchByTitle(e) {
+    e.preventDefault();
+    const key = e.target.querySelector('input').value;
+    if (key === ''){
+      return document.querySelector('.book-list').innerHTML =  "No result: Empty entry";
+    }
+    const transaction = db.transaction('books', 'readwrite');
+    const store = transaction.objectStore('books');
+    const index = store.index('title');
+    const objectStoreRequest = index.get(key)
+    objectStoreRequest.onsuccess = (event) => {
+      if (event.target.result === undefined){
+        return document.querySelector('.book-list').innerHTML =  "No result: Can't find entry in DB";
+      }
+      console.log(event);
+      const book = event.target.result;
+      return document.querySelector('.book-list').innerHTML =  `<div href="#" class="book-card">
+      <img src=${book.imageUrl} alt="picture of book"/>
+        <div class="book-details">
+          <h3>${book.title}</h3>
+          <span>by ${book.author}</span>
+          <span>rated ${book.rating} of ${book.ratingsNo} ratings</span>
+          <div class="description">${book.description}</div>
+          <div class="book-actions">
+            <button>
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" fill="#ccc" viewBox="0 0 383.947 383.947" style="enable-background:new 0 0 383.947 383.947;" xml:space="preserve" width="22px" height="22px">
+                  <polygon points="0,303.947 0,383.947 80,383.947 316.053,147.893 236.053,67.893 " />
+                  <path d="M377.707,56.053L327.893,6.24c-8.32-8.32-21.867-8.32-30.187,0l-39.04,39.04l80,80l39.04-39.04
+                    C386.027,77.92,386.027,64.373,377.707,56.053z" />
+                </svg>
+              </button>
+              <button>
+                <svg id="Capa_1" enable-background="new 0 0 515.556 515.556" height="22px" width="22px" fill="#ccc" viewBox="0 0 515.556 515.556"  xmlns="http://www.w3.org/2000/svg">
+                    <path d="m64.444 451.111c0 35.526 28.902 64.444 64.444 64.444h257.778c35.542 0 64.444-28.918 64.444-64.444v-322.222h-386.666z" />
+                    <path d="m322.222 32.222v-32.222h-128.889v32.222h-161.111v64.444h451.111v-64.444z" />
+                </svg>
+              </button>
+          </div>
+        </div>`;
+    }
+  }
+
 
   return {
     publishBooks: (publishBooks),
-    clearObjectStore: (clearObjectStore)
+    clearObjectStore: (clearObjectStore),
+    searchByTitle: (searchByTitle)
   };
 
-})();
+})(event);

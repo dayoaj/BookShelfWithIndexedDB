@@ -144,12 +144,25 @@
       background: transparent;
     }
 
-.book-actions button:hover svg {
-   fill: #000;
-}
-    /* .book-actions button:not(:last-child){
-      margin-right: 0rem;
-    } */
+    .book-actions button:hover svg {
+       fill: rgb(34, 34, 34, 1);
+    }
+
+    .book-actions .delete-btn {
+      background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTUuNTU2IDUxNS41NTYiIGhlaWdodD0iMjJweCIgd2lkdGg9IjIycHgiIGZpbGw9IiNjY2MiIHZpZXdCb3g9IjAgMCA1MTUuNTU2IDUxNS41NTYiICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciID4NCiAgICA8cGF0aCBkPSJtNjQuNDQ0IDQ1MS4xMTFjMCAzNS41MjYgMjguOTAyIDY0LjQ0NCA2NC40NDQgNjQuNDQ0aDI1Ny43NzhjMzUuNTQyIDAgNjQuNDQ0LTI4LjkxOCA2NC40NDQtNjQuNDQ0di0zMjIuMjIyaC0zODYuNjY2eiIgLz4NCiAgICA8cGF0aCBkPSJtMzIyLjIyMiAzMi4yMjJ2LTMyLjIyMmgtMTI4Ljg4OXYzMi4yMjJoLTE2MS4xMTF2NjQuNDQ0aDQ1MS4xMTF2LTY0LjQ0NHoiIC8+DQo8L3N2Zz4NCg==) no-repeat center;
+      background-size: contain;
+    }
+
+    .book-actions .delete-btn.hover {
+      background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTUuNTU2IDUxNS41NTYiIGhlaWdodD0iMjJweCIgd2lkdGg9IjIycHgiIGZpbGw9IiMyMjIiIHZpZXdCb3g9IjAgMCA1MTUuNTU2IDUxNS41NTYiICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciID4NCiAgICA8cGF0aCBkPSJtNjQuNDQ0IDQ1MS4xMTFjMCAzNS41MjYgMjguOTAyIDY0LjQ0NCA2NC40NDQgNjQuNDQ0aDI1Ny43NzhjMzUuNTQyIDAgNjQuNDQ0LTI4LjkxOCA2NC40NDQtNjQuNDQ0di0zMjIuMjIyaC0zODYuNjY2eiIgLz4NCiAgICA8cGF0aCBkPSJtMzIyLjIyMiAzMi4yMjJ2LTMyLjIyMmgtMTI4Ljg4OXYzMi4yMjJoLTE2MS4xMTF2NjQuNDQ0aDQ1MS4xMTF2LTY0LjQ0NHoiIC8+DQo8L3N2Zz4NCg==) no-repeat center;
+      background-size: contain;
+    }
+
+
+    .book-actions .delete-btn:hover {
+      opacity: 1;
+    }
+
 
     /* headings */
     h1 {

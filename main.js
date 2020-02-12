@@ -33,25 +33,20 @@ const idbApp = (function() {
 
   function bookDivContent(book) {
         return `<div href="#" class="book-card">
-        <img src=${book.imageUrl} alt="picture of book"/>
-          <div class="book-details">
-            <h3>${book.title}</h3>
-            <span>by ${book.author}</span>
-            <span>rated ${book.rating} of ${book.ratingsNo} ratings</span>
-            <div class="description">${book.description}</div>
-            <div class="book-actions">
-              <button>
-                  <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" fill="#ccc" viewBox="0 0 383.947 383.947" style="enable-background:new 0 0 383.947 383.947;" xml:space="preserve" width="22px" height="22px">
-                    <polygon points="0,303.947 0,383.947 80,383.947 316.053,147.893 236.053,67.893 " />
-                    <path d="M377.707,56.053L327.893,6.24c-8.32-8.32-21.867-8.32-30.187,0l-39.04,39.04l80,80l39.04-39.04
-                      C386.027,77.92,386.027,64.373,377.707,56.053z" />
-                  </svg>
-                </button>
-                <button class="delete-btn">
-                </button>
-            </div>
-          </div>
-        </div>`;
+                  <img src=${book.imageUrl} alt="picture of book"/>
+                    <div class="book-details">
+                      <h3>${book.title}</h3>
+                      <span>by ${book.author}</span>
+                      <span>rated ${book.rating} of ${book.ratingsNo} ratings</span>
+                      <div class="description">${book.description}</div>
+                      <div class="book-actions">
+                        <button class="edit-btn">
+                        </button>
+                        <button class="delete-btn">
+                        </button>
+                      </div>
+                    </div>
+                  </div>`;
       }
 
   function renderBooks() {
@@ -369,16 +364,23 @@ const idbApp = (function() {
   }
 
   function handleHover(e){
-    if (e.target && e.target.classList.contains("delete-btn"))
-    e.target.classList.add("hover");
+    if (e.target && e.target.classList.contains("edit-btn")){
+      // console.log(e);
+      e.target.classList.add("hover");
+      // console.log(e);
+    }
+    if (e.target && e.target.classList.contains("delete-btn")){
+      e.target.classList.add("hover");
+    }
   }
 
   function handleLeave(e){
-
-    // if (e.target && e.target.classList.contains("delete-btn"))
-    // console.log("We are in handleLeave");
-    console.log(e.target.classList);
-    // e.target.classList.remove("hover");
+    if (e.target && e.target.classList.contains("edit-btn")){
+      e.target.classList.remove("hover");
+    }
+    if (e.target && e.target.classList.contains("delete-btn")){
+      e.target.classList.remove("hover");
+    }
   }
 
   return {

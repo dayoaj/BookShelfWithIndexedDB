@@ -381,7 +381,7 @@
   .modal-content {
     position: relative;
     background-color: white;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 2rem 1rem;
     margin: auto;
     width: 98%;
     border-top-left-radius: 2px;
@@ -389,9 +389,20 @@
     animation-name: animatebottom;
     animation-duration: 0.4s;
   }
+  .modal-content > header {
+    display: flex;
+    padding: 0 0.5rem;
+    justify-content: space-between;
+  }
 
-  .close-btn {
+  .modal-content > header > span{
+    font-size: 2rem;
+    align-self: center;
+  }
+
+  .modal-content > header > span.close-btn {
     cursor: pointer;
+    font-size: 3rem;
   }
 
   @keyframes animatebottom {
@@ -411,11 +422,10 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    height: 75%;
   }
 
-  .modal-content > header > span{
-    font-size: 2rem;
-  }
+
 
   .form-input-set {
     display: flex;
@@ -428,10 +438,16 @@
 
   .form-input-set.ratings-group {
     flex-direction: row;
+    justify-content: space-between;
   }
 
  .ratings {
     padding: 0;
+    width: 45%;
+ }
+
+ .ratings input {
+   width: 100%;
  }
 
  form#book-form label {
@@ -470,7 +486,11 @@
       main {
         grid-column: 3/9;
       }
-    }
+
+      .modal-content {
+        width: 75%;
+      }
+  }
 
     @media screen and (max-width: 1110px) {
       .nav-item button svg {

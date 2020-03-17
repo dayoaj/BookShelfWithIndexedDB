@@ -12,10 +12,15 @@ const idbApp = (function() {
 
   let db;
   const request = window.indexedDB.open("books", 1);
+  let modal = document.querySelector(".modal");
+  let modalContent = document.querySelector(".modal-content");
+  let closeModalBtn = document.querySelector(".close-btn");
+
 
   request.onsuccess = function(event) {
 
     db = request.result;
+    renderBooks();
     console.log("Database Opened");
   }
 
@@ -25,7 +30,7 @@ const idbApp = (function() {
 
   request.onupgradeneeded = function(event) {
       const store = event.currentTarget.result.createObjectStore('books', {keyPath: "id"});
-
+      console.log('in onupgradeneeded');
       store.createIndex('title', 'title');
       store.createIndex('rating','rating');
   }
@@ -77,7 +82,7 @@ const idbApp = (function() {
           author: 'Sam Newman',
           rating: 4.49,
           ratingsNo: 39,
-          description: `How do you detangle a monolithic system and migrate it to a microservices architecture? How do you do it while maintaining business-as-usual? As a companion to Sam Newman's extremely popular Building Microservices...`,
+          description: `How do you detangle a monolithic system and migrate it to a microservices architecture? How do you do it while maintaining business-as-usual?...`,
           imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1566123566l/44144499.jpg',
           year: 2016,
           tags: []
@@ -110,7 +115,7 @@ const idbApp = (function() {
           author: 'Robert C. Martin',
           rating: 4.40,
           ratingsNo: 13118,
-          description: `Even bad code can function. But if code isn t clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn t have to be that way....`,
+          description: `Even bad code can function. But if code isn t clean, it can bring a development organization to its knees. Every year, countless hours...`,
           imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1436202607l/3735293._SX318_.jpg',
           year: 2016,
           tags: []
@@ -121,7 +126,7 @@ const idbApp = (function() {
           author: 'Robert M. Sapolsky',
           rating: 4.41,
           ratingsNo: 7918,
-          description: `More than a decade in the making, this game-changing book is Robert Sapolsky's genre-shattering attempt to answer that question as fully as perhaps only he could, looking at it from every angle. Sapolsky's storytelling concept is delightful but it also has a powerful intrinsic logic...`,
+          description: `More than a decade in the making, this game-changing book is Robert Sapolsky's genre-shattering attempt to answer that question as fully as perhaps only he could, looking at it from every angle. Sapolsky's...`,
           imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1517732866l/31170723._SY475_.jpg',
           year: 2016,
           tags: []
@@ -165,7 +170,7 @@ const idbApp = (function() {
           author: 'Stephen R. Covey et al',
           rating: 4.10,
           ratingsNo: 458521,
-          description: `When Stephen Covey first released The Seven Habits of Highly Effective People, the book became an instant rage because people suddenly got up and took notice that their lives were headed off in the wrong direction; and more than that...`,
+          description: `When Stephen Covey first released The Seven Habits of Highly Effective People, the book became an instant rage because people suddenly got up and took notice that...`,
           imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1421842784l/36072.jpg',
           year: 2016,
           tags: []
@@ -187,7 +192,7 @@ const idbApp = (function() {
           author: 'James Clear',
           rating: 4.33,
           ratingsNo: 51106,
-          description: `No matter your goals, Atomic Habits offers a proven framework for improving--every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead...`,
+          description: `No matter your goals, Atomic Habits offers a proven framework for improving--every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits...`,
           imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1535115320l/40121378._SY475_.jpg',
           year: 2018,
           tags: []
@@ -198,7 +203,7 @@ const idbApp = (function() {
           author: 'John M. Gottman et al',
           rating: 4.16,
           ratingsNo: 926,
-          description: `Results from world-renowned relationship expert John Gottman’s famous Love Lab have proven an incredible truth: Men make or break relationships. Based on 40 years of research, The Man’s Guide to Women unlocks the mystery of how to attract, satisfy, and succeed with a woman for a lifetime...`,
+          description: `Results from world-renowned relationship expert John Gottman’s famous Love Lab have proven an incredible truth: Men make or break relationships. Based on 40 years of research, The Man’s Guide to Women unlocks the mystery of how to attract...`,
           imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1444638337l/25664439.jpg',
           year: 2016,
           tags: []
@@ -253,7 +258,7 @@ const idbApp = (function() {
           author: 'Eric D. Beinhocker',
           rating: 4.27,
           ratingsNo: 1284,
-          description: `Over 6.4 billion people participate in a $36.5 trillion global economy, designed and overseen by no one. How did this marvel of self-organized complexity evolve? How is wealth created within this system? And how can wealth be increased for the benefit of individuals, businesses, and society?...`,
+          description: `Over 6.4 billion people participate in a $36.5 trillion global economy, designed and overseen by no one. How did this marvel of self-organized complexity evolve? How is wealth created within this system?...`,
           imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1388330469l/22456.jpg',
           year: 2006,
           tags: []
@@ -383,12 +388,24 @@ const idbApp = (function() {
     }
   }
 
+  function showModal(){
+    return modal.style.display = "block";
+  }
+
+  function hideModal(e) {
+    if (e.target === modal || e.target === closeModalBtn) {
+      modal.style.display = "none";
+    }
+  }
+
   return {
     publishBooks: (publishBooks),
     clearObjectStore: (clearObjectStore),
     searchByTitle: (searchByTitle),
     searchByRating: (searchByRating),
     deleteEntry: (deleteEntry),
+    showModal: (showModal),
+    hideModal: (hideModal),
     handleHover: (handleHover),
     handleLeave: (handleLeave)
   };

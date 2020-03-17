@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="content">
-    <header>
+    <header class="page-header">
       <h1 class="logo">Bookshelf</h1>
     </header>
     <nav class="desktop-nav">
@@ -89,7 +89,7 @@
         </button>
       </div>
       <div class="nav-item">
-        <button type="button" name="add-new-btn" id="add-btn">
+        <button type="button" name="add-new-btn" id="add-btn" onclick="idbApp.showModal()">
           Add New Book
           <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
           	 viewBox="0 0 42 42" style="enable-background:new 0 0 42 42;" xml:space="preserve"  >
@@ -138,7 +138,7 @@
         </svg>
         <span>Search</span>
       </a>
-      <a href="#">
+      <a href="#" onclick="idbApp.showModal()">
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
         	 viewBox="0 0 42 42" style="enable-background:new 0 0 42 42;" xml:space="preserve" class="mobile-nav-svg" >
         <path d="M37.059,16H26V4.941C26,2.224,23.718,0,21,0s-5,2.224-5,4.941V16H4.941C2.224,16,0,18.282,0,21s2.224,5,4.941,5H16v11.059
@@ -158,8 +158,55 @@
 
     </main>
   </div>
+  <div class="modal" onclick="idbApp.hideModal(event)">
+     <div class="modal-content">
+       <header>
+         <span>Add New Book</span>
+         <span class="close-btn" onclick="idbApp.hideModal(event)">&times;</span>
+       </header>
+       <form id="book-form">
+         <div class="form-input-set">
+           <label for="book-title">Book Title</label>
+           <input type="text" name="book-title" id="book-title" value="">
+         </div>
+         <div class="form-input-set">
+           <label for="book-author">Author</label>
+           <input type="text" name="book-author" id="book-author" value="">
+         </div>
 
-  <script type="text/javascript" src="main.js" async></script>
+         <div class="form-input-set ratings-group">
+           <div class="ratings">
+             <label for="book-rating">Book Rating</label>
+             <input type="text" name="book-rating" id="book-rating" value="">
+           </div>
+           <div class="ratings">
+             <label for="book-raters">Number of Raters</label>
+             <input type="text" name="book-raters" id="book-raters" value="" pattern="^\d*$">
+           </div>
+         </div>
+         <div class="form-input-set">
 
+           <label for="book-description">Description</label>
+           <textarea name="book-description" id="book-description" style="resize: vertical;"></textarea>
+         </div>
+         <div class="form-input-set">
+           <label for="book-image-url">Book's Image URL</label>
+           <input type="url" name="book-image-url" id="book-image-url" value="">
+         </div>
+         <div class="form-input-set">
+           <label for="book-release-year">Year of Release</label>
+           <input type="text" name="book-release-year" id="book-release-year" value="" pattern="^\d{4}$">
+         </div>
+         <div class="form-input-set">
+           <label for="tags">Tags (e.g. fiction, horror)</label>
+           <input type="text" name="tags" id="tags" value="" disabled>
+         </div>
+
+         <button type="submit" name="book-submit-btn">Add New Book</button>
+       </form>
+     </div>
+  </div>
+
+  <script type="text/javascript" src="main.js"></script>
 </body>
 </html>

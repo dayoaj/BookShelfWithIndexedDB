@@ -17,7 +17,7 @@
       grid-template-rows: minmax(55px, 10%) 1fr;
       height: 100vh;
     }
-    header {
+    header.page-header {
       grid-column: 1/9;
       padding: 1rem 2rem;
       background: #ffaa1d;
@@ -43,6 +43,7 @@
       display: flex;
       flex-direction: column;
       align-items: stretch;
+      margin-bottom: 6rem;
     }
     .mobile-nav-svg {
       fill: #a9a9a9;
@@ -122,7 +123,7 @@
       justify-content: flex-start;
       flex-direction: column;
       align-items: flex-start;
-      font: 1.2rem 'Roboto', sans-serif;
+      font: 1.4rem 'Roboto', sans-serif;
       padding-left: 1.5rem;
     }
 
@@ -226,7 +227,7 @@
       display: flex;
       justify-content: space-between;
       font-family: "Open Sans", sans-serif;
-      font-size: 2rem;
+      font-size: 1.9rem;
       color: #222;
       align-items: center;
       max-height: 5.5rem;
@@ -279,8 +280,8 @@
       box-shadow: 0px 0px 4px 1px #b23fc5;
     }
 
-button#populate-db-btn:hover svg, button#populate-db-btn:active svg {
-      fill: #603269;
+    button#populate-db-btn:hover svg, button#populate-db-btn:active svg {
+          fill: #603269;
     }
 
 
@@ -354,19 +355,107 @@ button#populate-db-btn:hover svg, button#populate-db-btn:active svg {
       align-self: center;
     }
 
-.nav-item button#submit-button svg {
-    width: 30px;
-    height: 30px;
-}
+  .nav-item button#submit-button svg {
+      width: 30px;
+      height: 30px;
+  }
 
-button#submit-button:hover svg, button#submit-button:active svg{
-  fill: #000;
-}
+  button#submit-button:hover svg, button#submit-button:active svg{
+    fill: #000;
+  }
+
+
+
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .modal-content {
+    position: relative;
+    background-color: white;
+    padding: 0.5rem 2rem;
+    margin: auto;
+    width: 98%;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    animation-name: animatebottom;
+    animation-duration: 0.4s;
+  }
+
+  .close-btn {
+    cursor: pointer;
+  }
+
+  @keyframes animatebottom {
+    from {bottom:-300px; opacity: 0}
+    to {bottom:0; opacity: 1}
+  }
+
+  form#book-form input[type="text"],
+  form#book-form input[type="url"],
+  form#book-form textarea
+  {
+    padding: 0.25rem 0.8rem;
+    /* border-radius: 2px; */
+  }
+
+  form#book-form {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .modal-content > header > span{
+    font-size: 2rem;
+  }
+
+  .form-input-set {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    align-items: stretch;
+    flex: 1 1 auto;
+    height: 5rem;
+  }
+
+  .form-input-set.ratings-group {
+    flex-direction: row;
+  }
+
+ .ratings {
+    padding: 0;
+ }
+
+ form#book-form label {
+   font-size: 1.5rem;
+ }
+
+  button[name="book-submit-btn"] {
+    background-color: #673ab7;
+    border: none;
+    padding: .5rem 0.2rem;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: white;
+    margin-top: .3rem;
+  }
+
+
+
 
 
 
     /* Media Queries */
-    @media screen and (min-width: 810px) {
+    @media screen and (min-width: 825px) {
       .content {
         grid-template-rows: minmax(55px, 10%) 1fr;
       }

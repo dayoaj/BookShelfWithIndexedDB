@@ -1,4 +1,4 @@
-/* generic */
+/* base */
     *, body {
       box-sizing: border-box;
       margin: 0;
@@ -24,6 +24,12 @@
       display: flex;
       align-items: center;
     }
+
+    header.page-header a{
+      color: initial;
+      text-decoration: none;
+    }
+
     .mobile-nav {
       display: flex;
       position: fixed;
@@ -34,6 +40,10 @@
       right: 0;
       bottom: 0;
     }
+
+    /* .mobile-nav a span {
+      color: #999;
+    } */
 
     main {
       grid-column: 1/9;
@@ -58,7 +68,7 @@
     .mobile-nav a {
       font-size: 1.4rem;
       text-decoration: none;
-      color: #a9a9a9;
+      color: #666;
       font-family: Verdana, sans-serif;
       flex: 1 1 auto;
       display: flex;
@@ -102,10 +112,11 @@
         border:1px solid #CCC;
         box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
         cursor: pointer;
-        vertical-align: middle;
         padding: 2rem 1rem 2rem;
         font-size: 1.2rem;
         height: 90%;
+        width: 100%;
+        justify-content: stretch;
     }
     .book-card:active {
         box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
@@ -116,6 +127,8 @@
     }
     .book-card img {
       width: 13rem;
+      flex: 0 0 13rem;
+      min-width: 0;
     }
 
     .book-details {
@@ -125,11 +138,13 @@
       align-items: flex-start;
       font: 1.4rem 'Roboto', sans-serif;
       padding-left: 1.5rem;
+      flex-grow: 1;
     }
 
     .book-details .description {
       flex-grow: 2;
-      overflow: overlay;
+      overflow: auto;
+      margin-top: 0.7rem;
     }
 
     .book-details .book-actions {
@@ -137,6 +152,7 @@
       align-self: flex-end;
       justify-content: space-between;
       width: 8rem;
+      margin-top: 1rem;
     }
 
     .book-actions button {
@@ -189,7 +205,9 @@
       padding: 0.7rem 0.7rem 0.7rem 2rem;
     }
 
-
+    .no-scroll {
+      overflow: hidden;
+    }
 
     button.action-tag  {
       background-color: #ce93d8;
@@ -259,7 +277,7 @@
     }
 
     button#add-btn {
-      background-color: #2ec56e;
+      background-color: #4CAF50;
     }
 
     button#add-btn:hover, button#add-btn:active {
@@ -285,12 +303,16 @@
     }
 
 
+    #meine-nummer{
+      display: none;
+    }
+
     .desktop-search-svg {
       fill: #a9a9a9;
       width: 20px;
       height: 20px;
       position: absolute;
-      top: 3.7rem;
+      top: 4.1rem;;
       left: 5rem;
     }
 
@@ -306,8 +328,9 @@
       justify-content: stretch;
     }
 
-    fieldset {
+    .nav-item fieldset {
       border-radius: 3px;
+      width: 100%;
     }
 
     .nav-item legend {
@@ -336,15 +359,16 @@
       border-radius: 4px;
       border: 1px solid #ccc;
       margin: 1rem 0rem 0rem 0rem;
+      width: 100%;
     }
 
     .search-label {
       font-family: sans-serif;
-      font-size: 1.1rem;
-      color: #aaa;
+      font-size: 1.2rem;
+      color: #999;
     }
 
-    #submit-button {
+    .submit-button {
       border: none;
       background: none;
       cursor: pointer;
@@ -355,12 +379,12 @@
       align-self: center;
     }
 
-  .nav-item button#submit-button svg {
+  .nav-item button.submit-button svg {
       width: 30px;
       height: 30px;
   }
 
-  button#submit-button:hover svg, button#submit-button:active svg{
+  button.submit-button:hover svg, button.submit-button:active svg{
     fill: #000;
   }
 
@@ -370,29 +394,52 @@
   .modal {
     display: none;
     position: fixed;
-    padding-top: 50px;
+    /* padding-top: 50px; */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.5);
+    z-index: 20;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #search-books-modal {
+    background-color: rgba(0,0,0,0);
+    align-items: stretch;
   }
 
   .modal-content {
-    position: relative;
+    position: absolute;
     background-color: white;
     padding: 0.5rem 2rem 1rem;
     margin: auto;
     width: 98%;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+    height: auto;
+    border-radius: 3px;
     animation-name: animatebottom;
     animation-duration: 0.4s;
   }
+
+  #search-books-modal > .modal-content{
+    border-top: 1px solid #111;
+    border-left: 1px solid #111;
+    border-right: 1px solid #111;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 60%;
+    width: 99%;
+    bottom: 10%;
+    animation-name: animatebottomsearch;
+  }
+
   .modal-content > header {
     display: flex;
     padding: 0 0.5rem;
     justify-content: space-between;
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 1.25rem;
   }
 
   .modal-content > header > span{
@@ -406,8 +453,12 @@
   }
 
   @keyframes animatebottom {
-    from {bottom:-300px; opacity: 0}
-    to {bottom:0; opacity: 1}
+    from {bottom: -50%; opacity: 0}
+    to {bottom:10%; opacity: 1}
+  }
+  @keyframes animatebottomsearch {
+    from {bottom: -50%; opacity: 0}
+    to {bottom:10%; opacity: 1}
   }
 
   form#book-form input[type="text"],
@@ -415,17 +466,25 @@
   form#book-form textarea
   {
     padding: 0.25rem 0.8rem;
-    /* border-radius: 2px; */
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    line-height: 2rem;
   }
+
+
+  /* form#book-form input[type="text"]:focus:invalid,
+  form#book-form input[type="url"]:focus:invalid,
+  form#book-form textarea:focus:invalid
+  {
+    border: 1px solid #a00;
+  } */
 
   form#book-form {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    height: 75%;
+    height: 75vh;
   }
-
-
 
   .form-input-set {
     display: flex;
@@ -433,21 +492,26 @@
     margin-bottom: 1rem;
     align-items: stretch;
     flex: 1 1 auto;
-    height: 5rem;
+    height: 6rem;
   }
 
-  .form-input-set.ratings-group {
+  .form-input-set.inline-group {
     flex-direction: row;
     justify-content: space-between;
   }
 
- .ratings {
+ .inline-input {
     padding: 0;
     width: 45%;
  }
 
- .ratings input {
+ .inline-input input {
    width: 100%;
+ }
+
+ .describe-control {
+   color: #999;
+    font-size: 1.2rem;
  }
 
  form#book-form label {
@@ -462,7 +526,7 @@
     font-weight: bold;
     font-size: 1.8rem;
     color: white;
-    margin-top: .3rem;
+    margin-top: 1rem;
   }
 
 
@@ -488,7 +552,11 @@
       }
 
       .modal-content {
-        width: 75%;
+        width: 65%;
+      }
+
+      form#book-form {
+        height: auto;
       }
   }
 
@@ -497,7 +565,13 @@
         display: none;
       }
 
-      #submit-button svg {
+      .submit-button svg {
         display: block;
+      }
+    }
+
+    @-moz-document url-prefix() {
+      @media screen and (max-width: 1145px){
+
       }
     }

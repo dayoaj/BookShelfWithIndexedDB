@@ -1,5 +1,5 @@
 # BookShelfWithIndexedDB
 
-Link to live Demo: https://inspiring-goldstine-e23f50.netlify.com/ 
+Link to live Demo: [https://dayoaj.github.io/BookShelfWithIndexedDB ](https://dayoaj.github.io/BookShelfWithIndexedDB)
 
 **To Begin:** Click on "Populate DB" button to initialise IndexedDB.
